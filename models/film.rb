@@ -34,9 +34,11 @@ class Film
     ON tickets.customer_id = customers.id
     WHERE tickets.film_id = $1"
     Customer.map_items(SqlRunner.run(sql, [@id]))
-
   end
 
+  def audience_size
+    return self.customers_by_film.count
+  end
   def delete
     sql = "DELETE FROM films WHERE id = $1;"
     values = [@id]
